@@ -2,15 +2,15 @@
 import openai
 import telebot
 
-from funcoes.codigo import codigo
-from funcoes.comunidade import comunidade
-from funcoes.exemplo import exemplo
-from funcoes.linguagem import linguagem
-from funcoes.mascaraderede import mascaraderede
-from funcoes.projeto import projeto
-from funcoes.sintaxe import sintaxe
-from funcoes.sistemasoperacionais import sistemasoperacionais
-from funcoes.solucoes import solucoes
+from funcoes.code import code
+from funcoes.community import community
+from funcoes.exemple import exemple
+from funcoes.language import language
+from funcoes.networkmask import networkmask
+from funcoes.project import project
+from funcoes.syntax import syntax
+from funcoes.operationalsystem import operationalsystem
+from funcoes.solutions import solutions
 
 #variáveis
 openai.api_key = "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"
@@ -21,45 +21,45 @@ bot = telebot.TeleBot(chave_api_telegram)
 
 @bot.message_handler(commands=["codigo"])
 def chamada(message):
-	codigo(bot, message)
+	code(bot, message)
 
 @bot.message_handler(commands=["linguagem"])
 def chamada(message):
-	linguagem(bot, message)
+	language(bot, message)
 
 @bot.message_handler(commands=["comunidade"])
 def chamada(message):
-	comunidade(bot, message)
+	community(bot, message)
 
 @bot.message_handler(commands=["exemplo"])
 def chamada(message):
-	exemplo(bot, message)
+	exemple(bot, message)
 
 @bot.message_handler(commands=["projeto"])
 def chamada(message):
-	projeto(bot, message)
+	project(bot, message)
 
 @bot.message_handler(commands=["sintaxe"])
 def chamada(message):
-	sintaxe(bot, message)
+	syntax(bot, message)
 
 @bot.message_handler(commands=["mascaraDeRede"])
 def chamada(message):
-	mascaraderede(bot, message)
+	networkmask(bot, message)
 
 @bot.message_handler(commands=["sistemasOperacionais"])
 def chamada(message):
-	sistemasoperacionais(bot, message)
+	operationalsystem(bot, message)
 
 @bot.message_handler(commands=["solucoes"])
 def chamada(message):
-	solucoes(bot, message)
+	solutions(bot, message)
 
 def verificar(message):
   return True
 
 @bot.message_handler(func=verificar)
-def responder(message):
+def answer(message):
 
   text  = """
 	Olá, eu sou o TechAssist

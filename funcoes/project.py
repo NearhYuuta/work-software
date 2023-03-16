@@ -1,4 +1,4 @@
-def projeto(bot, message):
+def project(bot, message):
     text = "Olá eu sou o comando que fará o projeto"
     
     bot.reply_to(message, text)
