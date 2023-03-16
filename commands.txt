@@ -1,0 +1,18 @@
+bibliotecas - pyTelegramBotAPI, openai
+
+Comandos:
+
+1- /codigo *
+2- /comunidade *
+3- /exemplo *
+4- /linguagem *
+5- /MascaraDeRede *
+6- /projeto *
+7- /sintaxe *
+8- /sistemasOperacionais *
+9- /solucoes *
+
+Talvez: /noticias e /converter
+
+Cronograma: 
+
