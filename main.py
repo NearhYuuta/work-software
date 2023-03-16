@@ -4,7 +4,7 @@ import telebot
 
 from funcoes.code import code
 from funcoes.community import community
-from funcoes.exemple import exemple
+from funcoes.example import example
 from funcoes.language import language
 from funcoes.networkmask import networkmask
 from funcoes.project import project
@@ -33,7 +33,7 @@ def chamada(message):
 
 @bot.message_handler(commands=["exemplo"])
 def chamada(message):
-	exemple(bot, message)
+	example(bot, message)
 
 @bot.message_handler(commands=["projeto"])
 def chamada(message):
