@@ -1,7 +1,3 @@
-bibliotecas - pyTelegramBotAPI, openai
-
-Comandos:
-
 1- /codigo *
 2- /comunidade *
 3- /exemplo *
@@ -12,7 +8,4 @@ Comandos:
 8- /sistemasOperacionais *
 9- /solucoes *
 
-Talvez: /noticias e /converter
-
-Cronograma: 
-
+Talvez: /noticias, /converter, /help

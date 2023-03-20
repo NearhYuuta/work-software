@@ -1,0 +1,5 @@
+Bibliotecas: 
+  - pyTelegramBotAPI
+  - openai
+  - TextBlob
+  - requests
