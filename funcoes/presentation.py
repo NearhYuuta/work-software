@@ -2,7 +2,11 @@ def presentation(bot, message):
   text  = """
 	Olá, eu sou o TechAssist e estou aqui para ajudá-lo com suas dúvidas relacionadas à tecnologia e programação. 
 
-/comunidade - Vou listar para você comunidades, fóruns e outras plataformas de discussão relacionadas à tecnologia da informação.
+/buscar - buscarei códigos na minha base de dados de acordo com a lingaugem que você informar
+
+/codigo - Me envie um codigo e diga a qual linguagem ele pertence e o que ele faz, assim poderei armazená-lo para outras pessoas poderem buscar na minha base de dados
+
+/organizacoes - Vou mostrar para você alguma organização aleatoria de programação do github.
 
 /exemplo - Vou mostrar um exemplo de código com base na linguagem que você pedir.
 
