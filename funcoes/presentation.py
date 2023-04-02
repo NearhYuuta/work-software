@@ -1,28 +1,28 @@
 def presentation(bot, message):
   text  = """
-	Olá, eu sou o TechAssist e estou aqui para ajudá-lo com suas dúvidas relacionadas à tecnologia e programação. 
+	Olá! Eu sou o TechAssist, um assistente virtual pronto para ajudá-lo com todas as suas dúvidas relacionadas a tecnologia e programação. Com meus recursos avançados, posso oferecer diversos comandos úteis que podem auxiliá-lo no seu dia a dia. Confira abaixo:
 
-/buscar - buscarei códigos na minha base de dados de acordo com a lingaugem que você informar
+/buscar - Posso buscar códigos em minha base de dados de acordo com a linguagem que você especificar.
 
-/codigo - Me envie um codigo e diga a qual linguagem ele pertence e o que ele faz, assim poderei armazená-lo para outras pessoas poderem buscar na minha base de dados
+/codigo - Você pode me enviar um código e informar a qual linguagem ele pertence e o que ele faz. Assim, poderei armazená-lo em minha base de dados para que outras pessoas possam buscar.
 
-/organizacoes - Vou mostrar para você alguma organização aleatoria de programação do github.
+/exemplo - Posso mostrar exemplos de códigos com base na linguagem que você pedir.
 
-/exemplo - Vou mostrar um exemplo de código com base na linguagem que você pedir.
-
-/linguagem - Vou fornecer informações sobre a linguagem de programação que você especificar.
+/linguagem - Fornecerei informações detalhadas sobre a linguagem de programação que você especificar.
 
 /mascaraDeRede - Posso calcular uma máscara de rede para você com base nas informações que me fornecer.
 
-/projeto - Vou fornecer ideias para projetos de programação.
+/organizacao - Posso mostrar organizações aleatórias de programação do GitHub para você explorar.
 
-/sintaxe - Vou fornecer informações detalhadas sobre a sintaxe e estrutura de diferentes linguagens de programação.
+/projeto - Vou fornecer ideias de projetos de programação, seja para sites ou softwares.
 
-/sistemasOperacionais - Vou fornecer informações sobre sistemas operacionais, suas funcionalidades e diferenças entre as versões.
+/sintaxe - Ofereço informações detalhadas sobre a sintaxe e estrutura de diferentes linguagens de programação.
 
-/solucoes - Vou fornecer soluções para problemas comuns encontrados na programação e no uso de tecnologias da informação.
+/sistemaOperacional - Posso informar qual o seu sistema operacional e mostrar informações relevantes sobre ele.
 
-Para usar qualquer um desses comandos, basta digitar "/comando" e enviar a mensagem para mim. Estou aqui para ajudá-lo a se tornar um melhor programador e resolver seus problemas de TI!
+/solucoes - Posso fornecer soluções para problemas comuns encontrados em dispositivos de hardware, como computadores, celulares e outros equipamentos eletrônicos.
+
+Para utilizar qualquer um desses comandos, basta digitar "/comando" e enviar a mensagem para mim. Fico feliz em ajudá-lo a se tornar um programador ainda melhor e a solucionar seus problemas de TI.
   """
       
-  bot.reply_to(message,text)
+  bot.reply_to(message, text)

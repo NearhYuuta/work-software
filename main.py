@@ -1,5 +1,4 @@
 #importações de bibliotecas
-import openai
 import telebot
 import pandas as pd
 import random
@@ -15,7 +14,6 @@ from funcoes.solutions import solutions
 from funcoes.presentation import presentation
 
 #variáveis
-openai.api_key = "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"
 chave_api_telegram = "6106311624:AAGH_MRyPVA6y2yNcRLu3-mn4pXyjCXF-HY"
 bot = telebot.TeleBot(chave_api_telegram)
 data_frame = pd.read_csv('assets/data.csv', sep=";")
@@ -93,7 +91,7 @@ def chamada(message):
 def chamada(message):
 	networkmask(bot, message)
 
-@bot.message_handler(commands=["organizacoes"])
+@bot.message_handler(commands=["organizacao"])
 def organizations(message):
 
 	response = requests.get("https://api.github.com/organizations")
@@ -115,7 +113,7 @@ def organizations(message):
 	bot.send_message(message.chat.id, text)
 
 
-@bot.message_handler(commands=["sistemasOperacionais"])
+@bot.message_handler(commands=["sistemaOperacional"])
 def chamada(message):
 	operationalsystem(bot, message)
 
