@@ -5,7 +5,6 @@ import pandas as pd
 import random
 import requests
 
-from funcoes.language import language
 from funcoes.networkmask import networkmask
 from funcoes.project import project
 from funcoes.syntax import syntax
@@ -15,7 +14,7 @@ from funcoes.presentation import presentation
 
 #variáveis
 chave_api_telegram = "6106311624:AAGH_MRyPVA6y2yNcRLu3-mn4pXyjCXF-HY"
-openai.api_key = "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"
+openai.api_key = "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"
 bot = telebot.TeleBot(chave_api_telegram)
 data_frame = pd.read_csv('assets/data.csv', sep=";")
 #chamada das funções
@@ -73,8 +72,23 @@ def wait_function(message, language, code):
 	bot.send_message(message.chat.id, "Seu código foi adicionado com sucesso!")
 
 @bot.message_handler(commands=["linguagem"])
-def chamada(message):
-	language(bot, message)
+def language(message):
+	bot.send_message(message.chat.id, "Informe a linguagem que deseja informações")
+	bot.register_next_step_handler(message, wait_language_language)
+
+def wait_language_language(message):
+	language = message.text
+
+	prompt = f"por favor, me dê informações sobre a lingaugem de programação {language}"
+
+	response = openai.Completion.create(
+		engine="text-davinci-002",
+		prompt=prompt,
+		max_tokens=1024
+	)
+
+	text = f"Aqui estão algumas informações sobre a linguagem {language}: \n {response.choices[0].text}"
+	bot.send_message(message.chat.id, text)
 
 @bot.message_handler(commands=["exemplo"])
 def example(message):

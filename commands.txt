@@ -1,8 +1,8 @@
 1- /codigo * - feito - adiciona verificação para saber se o código mandado realmente pertence a linguagem informada
 2- /organização * - feito
 3- /exemplo * - feito
-4- /linguagem * - precisa ser re-feito
-5- /MascaraDeRede * - 
+4- /linguagem * - feito
+5- /MascaraDeRede * - Bora logo com isso davi senão eu mesmo faço
 6- /projeto * - feito
 8- /sistemasOperacionais * - 
 9- /solucoes * - 
