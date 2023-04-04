@@ -1,7 +1,7 @@
 import openai
 
 def project(bot, message):
-    openai.api_key = "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"
+    openai.api_key = "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"
     prompt = "Me diga uma ideia de projeto para um software ou site"
     response = openai.Completion.create(
         engine="text-davinci-002",

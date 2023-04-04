@@ -1,4 +1,3 @@
+
 def operationalsystem(bot, message):
-    text = "Olá eu sou o comando que que dará informações sobre o sistema operacional que você está usando."
-    
-    bot.reply_to(message, text)
+    bot.send_message(message.chat.id, "Olá, sou o comando que irá lhe dar informaçoes sobre sistemas operacionais")

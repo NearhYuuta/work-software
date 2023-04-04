@@ -1,10 +1,10 @@
 #importações de bibliotecas
 import telebot
+import openai
 import pandas as pd
 import random
 import requests
 
-from funcoes.example import example
 from funcoes.language import language
 from funcoes.networkmask import networkmask
 from funcoes.project import project
@@ -15,6 +15,7 @@ from funcoes.presentation import presentation
 
 #variáveis
 chave_api_telegram = "6106311624:AAGH_MRyPVA6y2yNcRLu3-mn4pXyjCXF-HY"
+openai.api_key = "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"
 bot = telebot.TeleBot(chave_api_telegram)
 data_frame = pd.read_csv('assets/data.csv', sep=";")
 #chamada das funções
@@ -76,8 +77,32 @@ def chamada(message):
 	language(bot, message)
 
 @bot.message_handler(commands=["exemplo"])
-def chamada(message):
-	example(bot, message)
+def example(message):
+	bot.send_message(message.chat.id, "Me informe a linguagem que você quer um exemplo")
+	bot.register_next_step_handler(message, wait_example)
+
+def wait_example(message):
+  language = message.text
+
+  if not language:
+    bot.send_message(message.chat.id, "Por favor informe uma linguagem de programação.")
+  else:
+    prompt = f"exemplo de código em {language}, e a explicação do código"
+
+    response = openai.Completion.create(
+    engine="text-davinci-002",
+    prompt=prompt,
+    max_tokens=1024,
+    n=1,
+    stop=None,
+    temperature=0.7
+    )
+
+    if response.choices[0].text:
+      example_text = response.choices[0].text
+      bot.send_message(message.chat.id, f"Aqui está um exemplo de código em {language}: \n{example_text}")
+    else:
+      bot.send_message(message.chat.id, "Não foi possível obter um exemplo de códdigo para essa linguagem. Por favor, tente novamente.")
 
 @bot.message_handler(commands=["projeto"])
 def chamada(message):

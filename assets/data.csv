@@ -4,3 +4,4 @@ Python;print('Hélio, World!');Printa 'Hélio, World' na tela
 Javascript;console.log('oi');Mostra um oi no console do navegador
 js;console.log('oi');Mostra um oi no console do navegador
 Python;console.log('oi');/codigo
+js;Console.log;Exibe um código
