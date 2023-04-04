@@ -9,7 +9,7 @@ from funcoes.language import language
 from funcoes.networkmask import networkmask
 from funcoes.project import project
 from funcoes.syntax import syntax
-from funcoes.operationalsystem import operationalsystem
+from funcoes.operationalsystems import operationalsystems
 from funcoes.solutions import solutions
 from funcoes.presentation import presentation
 
@@ -140,7 +140,7 @@ def organizations(message):
 
 @bot.message_handler(commands=["sistemaOperacional"])
 def chamada(message):
-	operationalsystem(bot, message)
+	operationalsystems(bot, message)
 
 @bot.message_handler(commands=["solucoes"])
 def chamada(message):

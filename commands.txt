@@ -4,8 +4,10 @@
 4- /linguagem * - precisa ser re-feito
 5- /MascaraDeRede * - 
 6- /projeto * - feito
-8- /sistemaOperacional * - 
+8- /sistemasOperacionais * - 
 9- /solucoes * - 
 10- /buscar - feito
+11 - /noticias - 
+12 - /ajuda - 
 
-Talvez: /noticias, /converter, /help
+Talvez: /noticias, /converter, 
