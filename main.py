@@ -4,22 +4,26 @@ import openai
 import pandas as pd
 import random
 import requests
+import PySimpleGUI as sg
 
+#importação dasfunções em outros arquivos
 from funcoes.networkmask import networkmask
 from funcoes.project import project
-from funcoes.syntax import syntax
-from funcoes.operationalsystems import operationalsystems
 from funcoes.solutions import solutions
 from funcoes.presentation import presentation
 
 #variáveis
 chave_api_telegram = "6106311624:AAGH_MRyPVA6y2yNcRLu3-mn4pXyjCXF-HY"
-openai.api_key = "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"
+openai.api_key = "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"
 bot = telebot.TeleBot(chave_api_telegram)
 data_frame = pd.read_csv('assets/data.csv', sep=";")
-#chamada das funções
 
-#FUNÇÃO PARA O COMANDO: /codigo
+#CHAMADA DAS FUNÇÕES
+def get_random_dog_image():
+	response = requests.get("https://random.dog/woof.json").json()
+	print(response)
+	return response["url"]
+
 def salvar(language, code, function_code):
 
 	global data_frame
@@ -40,6 +44,13 @@ def list_codes(language):
             codes += f"{row['codigo']}\n{row['funcao']}\n\n"
         return f"Códigos em {language}:\n\n{codes}"
 
+@bot.message_handler(commands=['secreto'])
+def send_random_dog(message):
+	image_url = get_random_dog_image()
+	chat_id = message.chat.id
+
+	bot.send_photo(chat_id, image_url)
+
 @bot.message_handler(commands=["buscar"])
 def list_language_codes(message):
     bot.send_message(message.chat.id, "Qual a linguagem?")
@@ -47,6 +58,7 @@ def list_language_codes(message):
 
 def wait_language_search(message):
     language = message.text
+	
     codes_list = list_codes(language)
     bot.send_message(message.chat.id, codes_list)
 
@@ -104,12 +116,12 @@ def wait_example(message):
     prompt = f"exemplo de código em {language}, e a explicação do código"
 
     response = openai.Completion.create(
-    engine="text-davinci-002",
-    prompt=prompt,
-    max_tokens=1024,
-    n=1,
-    stop=None,
-    temperature=0.7
+    	engine="text-davinci-002",
+    	prompt=prompt,
+    	max_tokens=1024,
+    	n=1,
+    	stop=None,
+    	temperature=0.7
     )
 
     if response.choices[0].text:
@@ -121,10 +133,6 @@ def wait_example(message):
 @bot.message_handler(commands=["projeto"])
 def chamada(message):
 	project(bot, message)
-
-@bot.message_handler(commands=["sintaxe"])
-def chamada(message):
-	syntax(bot, message)
 
 @bot.message_handler(commands=["mascaraDeRede"])
 def chamada(message):
@@ -153,8 +161,24 @@ def organizations(message):
 
 
 @bot.message_handler(commands=["sistemaOperacional"])
-def chamada(message):
-	operationalsystems(bot, message)
+def operationl_system(message):
+	bot.send_message(message.chat.id, "Informe o sistema operacional que deseja informações")
+	bot.register_next_step_handler(message, wait_system)
+
+def wait_system(message):
+    system = message.text
+
+    prompt = f"Me dê informações sobre o sistema operacional {system}"
+
+    response = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=prompt,
+        max_tokens=1024
+    )
+
+    text = f"Aqui está algumas informações sobre o sistema opercional {system}: \n {response.choices[0].text}"
+
+    bot.send_message(message.chat.id, text)
 
 @bot.message_handler(commands=["solucoes"])
 def chamada(message):

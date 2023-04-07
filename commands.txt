@@ -4,7 +4,7 @@
 4- /linguagem * - feito
 5- /MascaraDeRede * - Bora logo com isso davi senão eu mesmo faço
 6- /projeto * - feito
-8- /sistemasOperacionais * - 
+8- /sistemasOperacionais * - feito
 9- /solucoes * - 
 10- /buscar - feito
 11 - /noticias - 
