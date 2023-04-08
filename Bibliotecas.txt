@@ -3,3 +3,4 @@ Bibliotecas:
   - openai
   - TextBlob
   - requests
+  - ipaddress

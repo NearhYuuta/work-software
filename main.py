@@ -2,12 +2,12 @@
 import telebot
 import openai
 import pandas as pd
+import ipaddress
 import random
 import requests
 import PySimpleGUI as sg
 
 #importação dasfunções em outros arquivos
-from funcoes.networkmask import networkmask
 from funcoes.project import project
 from funcoes.solutions import solutions
 from funcoes.presentation import presentation
@@ -43,6 +43,23 @@ def list_codes(language):
         for index, row in df_language.iterrows():
             codes += f"{row['codigo']}\n{row['funcao']}\n\n"
         return f"Códigos em {language}:\n\n{codes}"
+    
+	#funcao para calculo de rede
+
+def solicitar_endereco(message):
+	bot.reply_to(message, "Por favor, informe um endereço IPv4 válido")
+	bot.register_next_step_handler(message, processar_endereco)
+
+def processar_endereco(message):
+	try:
+		endereco = ipaddress.IPv4Network(message.text, strict=False)
+	except ipaddress.AddressValueError:
+		bot.reply_to(message, "Endereço IP inválido! Envie um endereço IP válido.")
+		return
+
+	mascara = endereco.netmask
+	bot.reply_to(message, f'A máscara de rede para o endereço {endereco} é {mascara}.')
+
 
 @bot.message_handler(commands=['secreto'])
 def send_random_dog(message):
@@ -135,8 +152,8 @@ def chamada(message):
 	project(bot, message)
 
 @bot.message_handler(commands=["mascaraDeRede"])
-def chamada(message):
-	networkmask(bot, message)
+def mascara_de_rede(message):
+	solicitar_endereco(message)
 
 @bot.message_handler(commands=["organizacao"])
 def organizations(message):
