@@ -5,18 +5,17 @@ import pandas as pd
 import ipaddress
 import random
 import requests
-import PySimpleGUI as sg
 
 #importação dasfunções em outros arquivos
 from funcoes.project import project
-from funcoes.solutions import solutions
 from funcoes.presentation import presentation
 
 #variáveis
-chave_api_telegram = "6106311624:AAGH_MRyPVA6y2yNcRLu3-mn4pXyjCXF-HY"
+chave_api_telegram = "6257127413:AAFNUzh6Hc4BDjwZnluWjp5LQwLuoGb35QU"
 openai.api_key = "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"
 bot = telebot.TeleBot(chave_api_telegram)
 data_frame = pd.read_csv('assets/data.csv', sep=";")
+data_solutions = pd.read_csv('assets/solutions.csv', sep=";")
 
 #CHAMADA DAS FUNÇÕES
 def get_random_dog_image():
@@ -43,23 +42,6 @@ def list_codes(language):
         for index, row in df_language.iterrows():
             codes += f"{row['codigo']}\n{row['funcao']}\n\n"
         return f"Códigos em {language}:\n\n{codes}"
-    
-	#funcao para calculo de rede
-
-def solicitar_endereco(message):
-	bot.reply_to(message, "Por favor, informe um endereço IPv4 válido")
-	bot.register_next_step_handler(message, processar_endereco)
-
-def processar_endereco(message):
-	try:
-		endereco = ipaddress.IPv4Network(message.text, strict=False)
-	except ipaddress.AddressValueError:
-		bot.reply_to(message, "Endereço IP inválido! Envie um endereço IP válido.")
-		return
-
-	mascara = endereco.netmask
-	bot.reply_to(message, f'A máscara de rede para o endereço {endereco} é {mascara}.')
-
 
 @bot.message_handler(commands=['secreto'])
 def send_random_dog(message):
@@ -152,8 +134,19 @@ def chamada(message):
 	project(bot, message)
 
 @bot.message_handler(commands=["mascaraDeRede"])
-def mascara_de_rede(message):
-	solicitar_endereco(message)
+def solicitar_endereco(message):
+	bot.reply_to(message, "Por favor, informe um endereço IPv4 válido")
+	bot.register_next_step_handler(message, processar_endereco)
+
+def processar_endereco(message):
+	try:
+		endereco = ipaddress.IPv4Network(message.text, strict=False)
+	except ipaddress.AddressValueError:
+		bot.reply_to(message, "Endereço IP inválido! Envie um endereço IP válido.")
+		return
+
+	mascara = endereco.netmask
+	bot.reply_to(message, f'A máscara de rede para o endereço {endereco} é {mascara}.')
 
 @bot.message_handler(commands=["organizacao"])
 def organizations(message):
@@ -198,8 +191,47 @@ def wait_system(message):
     bot.send_message(message.chat.id, text)
 
 @bot.message_handler(commands=["solucoes"])
-def chamada(message):
-	solutions(bot, message)
+def solutions(message):
+	text_type = """
+	Informe o tipo deproblema com o número:
+	1 - Software
+	2 - Hardware
+	"""
+	bot.send_message(message.chat.id, text_type)
+	bot.register_next_step_handler(message, wait_type)
+
+def wait_type(message):
+	type = message.text
+
+	if type == "1":
+		df_software = data_solutions.loc[data_solutions['tipo'] == "software"]
+		problems = ""
+		for index, row in df_software.iterrows():
+			problems += f"{index + 1} - {row['descrição']}\n\n"
+    
+		bot.send_message(message.chat.id, f"Aqui está algumas descrições de problemas de software: \n\n{problems}")
+		bot.send_message(message.chat.id, "Informe o número que a descrição melhor bate com seu problema: ")
+		bot.register_next_step_handler(message, lambda m: wait_index(m, df_software))
+
+	elif type == "2":
+		df_hardware = data_solutions.loc[data_solutions['tipo'] == 'hardware']
+		problems = ""
+		for index, row, in df_hardware.iterrows():
+			problems += f"{index + 1} - {row['descrição']}\n\n"
+		
+		bot.send_message(message.chat.id, f"Aqui está algumas descrições de problemas de software: \n\n{problems}")
+		bot.send_message(message.chat.id, "Informe o número que a descrição melhor bate com seu problema: ")
+		bot.register_next_step_handler(message, lambda m: wait_index(m, df_hardware))
+	else:
+		bot.send_message(message.chat.id, "Por favor, tente novamente: /solucoes")
+
+def wait_index(message, df_type):
+	index = int(message.text) - 1
+	df_problem = df_type.loc[index]
+	problem = df_problem["problema"]
+	solution = df_problem["solução"]
+	text = f"Problema: {problem}\nSolução: {solution}"
+	bot.send_message(message.chat.id, text)
 
 def verificar(message):
 	return True
