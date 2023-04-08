@@ -13,7 +13,7 @@ from funcoes.solutions import solutions
 from funcoes.presentation import presentation
 
 #variáveis
-chave_api_telegram = "6257127413:AAFNUzh6Hc4BDjwZnluWjp5LQwLuoGb35QU"
+chave_api_telegram = "6106311624:AAGH_MRyPVA6y2yNcRLu3-mn4pXyjCXF-HY"
 openai.api_key = "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"
 bot = telebot.TeleBot(chave_api_telegram)
 data_frame = pd.read_csv('assets/data.csv', sep=";")
