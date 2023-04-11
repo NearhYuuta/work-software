@@ -7,7 +7,6 @@ import random
 import requests
 
 #importação dasfunções em outros arquivos
-from funcoes.project import project
 from funcoes.presentation import presentation
 
 #variáveis
@@ -42,14 +41,7 @@ def list_codes(language):
         for index, row in df_language.iterrows():
             codes += f"{row['codigo']}\n{row['funcao']}\n\n"
         return f"Códigos em {language}:\n\n{codes}"
-
-@bot.message_handler(commands=['secreto'])
-def send_random_dog(message):
-	image_url = get_random_dog_image()
-	chat_id = message.chat.id
-
-	bot.send_photo(chat_id, image_url)
-
+    
 @bot.message_handler(commands=["buscar"])
 def list_language_codes(message):
     bot.send_message(message.chat.id, "Qual a linguagem?")
@@ -127,11 +119,19 @@ def wait_example(message):
       example_text = response.choices[0].text
       bot.send_message(message.chat.id, f"Aqui está um exemplo de código em {language}: \n{example_text}")
     else:
-      bot.send_message(message.chat.id, "Não foi possível obter um exemplo de códdigo para essa linguagem. Por favor, tente novamente.")
+      bot.send_message(message.chat.id, "Não foi possível obter um exemplo de código para essa linguagem. Por favor, tente novamente.")
 
 @bot.message_handler(commands=["projeto"])
-def chamada(message):
-	project(bot, message)
+def project(bot, message):
+    prompt = "Me diga uma ideia de projeto para um software ou site"
+    response = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=prompt,
+        max_tokens=150
+    )
+    text_response = f"Aqui está uma ideia de projeto: \n{response.choices[0].text}"
+    
+    bot.reply_to(message, text_response)
 
 @bot.message_handler(commands=["mascaraDeRede"])
 def solicitar_endereco(message):
