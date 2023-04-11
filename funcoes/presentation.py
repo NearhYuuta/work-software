@@ -16,6 +16,8 @@ def presentation(bot, message):
 
 /projeto - Vou fornecer ideias de projetos de programação, seja para sites ou softwares.
 
+/sintaxe - Ofereço informações detalhadas sobre a sintaxe e estrutura de diferentes linguagens de programação.
+
 /sistemaOperacional - Posso informar qual o seu sistema operacional e mostrar informações relevantes sobre ele.
 
 /solucoes - Posso fornecer soluções para problemas comuns encontrados em dispositivos de hardware, como computadores, celulares e outros equipamentos eletrônicos.
